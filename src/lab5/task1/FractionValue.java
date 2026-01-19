@@ -14,16 +14,12 @@ public interface FractionValue {
     double getDoubleValue();
 
     /**
-     * Устанавливает числитель дроби.
-     *
-     * @param numerator новый числитель
+     * Устанавливает числитель дроби
      */
     void setNumerator(int numerator);
 
     /**
-     * Устанавливает знаменатель дроби.
-     *
-     * @param denominator новый знаменатель
+     * Устанавливает знаменатель дроби
      */
     void setDenominator(int denominator);
 }
