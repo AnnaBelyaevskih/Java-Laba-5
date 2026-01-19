@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 /**
  * Класс для группировки людей по их номеру.
- * - Игнорируем людей без номера
  * - Имя приводим к виду: первая буква заглавная, остальные строчные
  * - Группируем по номеру
  * - Вывод в формате: [номер1:[имена], номер2:[имена], ...]
@@ -17,6 +16,7 @@ public class PeopleGroupingTask {
 
     /**
      * Считывает строки из файла и группирует людей по их номеру.
+     *
      * @param path путь к файлу с данными вида "имя:номер"
      * @return Map<Integer, List<String>> — ключ = номер, значение = список имён
      * @throws IOException если произошла ошибка при чтении файла
@@ -28,6 +28,7 @@ public class PeopleGroupingTask {
 
     /**
      * Группирует список строк вида "имя:номер" по номеру.
+     *
      * @param people список строк вида "имя:номер"
      * @return Map<Integer, List<String>> — ключ = номер, значение = список имён
      */
@@ -51,6 +52,7 @@ public class PeopleGroupingTask {
 
     /**
      * Форматирует имя: первая буква заглавная, остальные строчные.
+     *
      * @param name имя
      * @return имя с заглавной первой буквой
      */
@@ -62,6 +64,7 @@ public class PeopleGroupingTask {
     /**
      * Преобразует Map<Integer, List<String>> в строку в формате:
      * [номер1:[имена], номер2:[имена], ...]
+     *
      * @param grouped Map с группировкой
      * @return строка в нужном формате
      */
@@ -78,4 +81,3 @@ public class PeopleGroupingTask {
         return sb.toString();
     }
 }
-
