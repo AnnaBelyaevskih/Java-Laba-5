@@ -26,16 +26,21 @@ public class VoicedConsonantsTask {
      */
     public static Set<Character> find(Path path) throws IOException {
         Set<Character> found = new HashSet<>();
-
-        // Разбиваем текст на слова и обрабатываем каждое слово
-        for (String word : Files.readString(path).toLowerCase().split("\\s+")) {
-            for (char c : word.toCharArray()) {
+        String fullText = Files.readString(path);
+        // нижний регистр
+        String lowerText = fullText.toLowerCase();
+        String[] words = lowerText.split("\\s+");
+        //Обрабатываем каждое слово по очереди
+        for (String word : words) {
+            // Превращаем слово в набор отдельных символов
+            char[] letters = word.toCharArray();
+            for (char c : letters) {
+                // Проверяем: есть ли этот символ в нашем списке звонких?
                 if (VOICED.contains(c)) {
                     found.add(c);
                 }
             }
         }
-
         return new TreeSet<>(found);
     }
 }
