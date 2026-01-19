@@ -64,43 +64,84 @@ public class Main {
 
     // ---------- ЗАДАНИЕ 1 ----------
     private static void demoFraction() {
-        int numerator = readInt("Введите числитель: ");
-        int denominator;
+        int numerator1 = readInt("Введите числитель первой дроби: ");
+        int denominator1;
 
         while (true) {
-            denominator = readInt("Введите знаменатель (> 0): ");
-            if (denominator > 0) {
+            denominator1 = readInt("Введите знаменатель первой дроби (> 0): ");
+            if (denominator1 > 0) {
                 break;
             }
             System.out.println("Ошибка: знаменатель должен быть положительным.");
         }
 
-        Fraction fraction = new Fraction(numerator, denominator);
-        System.out.println("Дробь: " + fraction);
-        System.out.println("Вещественное значение: " + fraction.getDoubleValue());
+        Fraction fraction1 = new Fraction(numerator1, denominator1);
+
+        int numerator2 = readInt("Введите числитель второй дроби: ");
+        int denominator2;
+
+        while (true) {
+            denominator2 = readInt("Введите знаменатель второй дроби (> 0): ");
+            if (denominator2 > 0) {
+                break;
+            }
+            System.out.println("Ошибка: знаменатель должен быть положительным.");
+        }
+
+        Fraction fraction2 = new Fraction(numerator2, denominator2);
+
+        System.out.println("Первая дробь: " + fraction1);
+        System.out.println("Вторая дробь: " + fraction2);
+
+        System.out.println("Вещественное значение первой дроби: "
+                + fraction1.getDoubleValue());
+        System.out.println("Вещественное значение второй дроби: "
+                + fraction2.getDoubleValue());
+
+        System.out.println("Дроби равны: " + fraction1.equals(fraction2));
     }
+
 
     // ---------- ЗАДАНИЕ 2 ----------
     private static void demoCats() {
-        System.out.print("Введите имя кота: ");
-        String name = SCANNER.nextLine().trim();
+        System.out.print("Введите имя первого кота: ");
+        String name1 = SCANNER.nextLine().trim();
 
-        while (name.isEmpty()) {
-            System.out.print("Имя не может быть пустым. Введите имя кота: ");
-            name = SCANNER.nextLine().trim();
+        while (name1.isEmpty()) {
+            System.out.print("Имя не может быть пустым. Введите имя первого кота: ");
+            name1 = SCANNER.nextLine().trim();
         }
 
-        int times = readInt("Сколько раз кот должен мяукнуть? ", 1, 100);
+        int times1 = readInt("Сколько раз первый кот должен мяукнуть? ", 1, 100);
 
-        Cat cat = new Cat(name);
-        MeowCounterCat counterCat = new MeowCounterCat(cat);
+        System.out.print("Введите имя второго кота: ");
+        String name2 = SCANNER.nextLine().trim();
 
-        for (int i = 0; i < times; i++) {
-            MeowProcessor.process(counterCat);
+        while (name2.isEmpty()) {
+            System.out.print("Имя не может быть пустым. Введите имя второго кота: ");
+            name2 = SCANNER.nextLine().trim();
         }
 
-        System.out.println("Кот мяукал " + counterCat.getMeowCount() + " раз(а)");
+        int times2 = readInt("Сколько раз второй кот должен мяукнуть? ", 1, 100);
+
+        Cat cat1 = new Cat(name1);
+        Cat cat2 = new Cat(name2);
+
+        MeowCounterCat counterCat1 = new MeowCounterCat(cat1);
+        MeowCounterCat counterCat2 = new MeowCounterCat(cat2);
+
+        for (int i = 0; i < times1; i++) {
+            MeowProcessor.process(counterCat1);
+        }
+
+        for (int i = 0; i < times2; i++) {
+            MeowProcessor.process(counterCat2);
+        }
+
+        System.out.println("Кот \"" + name1 + "\" мяукал " + counterCat1.getMeowCount() + " раз(а)");
+        System.out.println("Кот \"" + name2 + "\" мяукал " + counterCat2.getMeowCount() + " раз(а)");
     }
+
 
     // ---------- ЗАДАНИЕ 3 ----------
     private static void demoList() {
@@ -124,16 +165,20 @@ public class Main {
         LoginGenerator generator = new LoginGenerator();
 
         for (int i = 0; i < count; i++) {
-            System.out.print("Введите фамилию и имя ученика: ");
-            String surname = SCANNER.nextLine().trim();
+            while (true) {
+                System.out.print("Введите фамилию и имя ученика: ");
+                String input = SCANNER.nextLine().trim();
 
-            while (surname.isEmpty()) {
-                System.out.print("Фамилия не может быть пустой. Повторите ввод: ");
-                surname = SCANNER.nextLine().trim();
+                try {
+                    String login = generator.generateLogin(input);
+                    System.out.println("Логин: " + login);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Ошибка ввода: " + e.getMessage());
+                }
             }
-
-            System.out.println("Логин: " + generator.generateLogin(surname));
         }
+
     }
 
     // ---------- ЗАДАНИЕ 5 ----------
