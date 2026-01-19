@@ -22,9 +22,22 @@ public class LoginGenerator {
      * @return уникальный логин (только фамилия и число при повторе)
      */
     public String generateLogin(String fullName) {
-        String surname = fullName.split(" ")[0];  // берём только фамилию
+        String[] parts = fullName.trim().split("\\s+");
+
+        if (parts.length < 2) {
+            throw new IllegalArgumentException(
+                    "Ожидается ввод в формате: Фамилия Имя");
+        }
+
+        String surname = parts[0];
+
         int count = counters.getOrDefault(surname, 0) + 1;
         counters.put(surname, count);
-        return count == 1 ? surname : surname + count;
+        if (count == 1) {
+            return surname;
+        } else {
+            return surname + count;
+        }
+
     }
 }
